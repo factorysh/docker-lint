@@ -1,4 +1,4 @@
-linter container
+Linter container
 ================
 
 Add a `linters.yml` to your project:
@@ -41,3 +41,8 @@ $ docker run \
     -v $HOME/.cache:/.cache \
     bearstech/lint
 ```
+
+Licence
+-------
+
+GPLv3, © 2019
