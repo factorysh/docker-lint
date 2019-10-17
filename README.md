@@ -1,7 +1,7 @@
 linter container
 ================
 
-Add a linter.yml to your project:
+Add a `linters.yml` to your project:
 
 ```
 $ cat linters.yml
