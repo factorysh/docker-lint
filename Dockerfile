@@ -15,11 +15,11 @@ RUN set -eux \
     &&  rm -Rf /.cache
 
 
-
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/venv/bin
-COPY scripts/ /scripts/
 
-ENTRYPOINT ["/scripts/linter.py"]
+COPY linter.py /opt/venv/bin/linter.py
+
+ENTRYPOINT ["/opt/venv/bin/linter.py"]
 
 # generated labels
 
