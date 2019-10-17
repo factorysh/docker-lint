@@ -7,13 +7,6 @@ import logging
 import fnmatch
 import subprocess
 
-LINTERS = {
-    'flake8': 'flake8',
-    'yamllint': 'yamllint',
-    'hadolint': 'hadolint',
-    'shellcheck': 'shellcheck',
-}
-
 if '--debug' in sys.argv:
     level = logging.DEBUG
 else:
@@ -23,6 +16,7 @@ logging.basicConfig(level=level, stream=sys.stdout)
 
 
 def is_cached(filename, cached):
+    """check if sha1 content of the file is the same as in ~/.cache dir"""
     filename = os.path.realpath(filename)
     cached_file = os.path.join(
         '/.cache/bearstech/lint', filename.lstrip('/')
@@ -40,6 +34,7 @@ def is_cached(filename, cached):
 
 
 def cache(files):
+    """cache sha1 content of the file in ~/.cache dir"""
     for filename in files:
         filename = os.path.realpath(filename)
         cached_file = os.path.join(
@@ -56,6 +51,7 @@ def cache(files):
 
 
 def find(include=None, exclude=None, **conf):
+    """find files based on include/exclude partterns"""
     if not include:
         return []
     files = []
@@ -78,18 +74,25 @@ def find(include=None, exclude=None, **conf):
 
 def main():
     log = logging.getLogger('linter')
+
+    # checks
     if not os.path.isfile('linters.yml'):
         log.critical('No linters.yml found!')
         sys.exit(1)
     if not os.path.isdir('/.cache'):
         log.warning('/.cache is not mounted')
+
+    # load conf
     with open('linters.yml') as fd:
         config = yaml.safe_load(fd.read())
+
+    # for each linter in conf
     for name, conf in sorted(config.items()):
         log = logging.getLogger(name)
         files, cached = find(**conf)
         if files:
-            args = [LINTERS[name]] + conf.get('options', []) + files
+            # run linter using subprocess
+            args = [name] + conf.get('options', []) + files
             log.info('Processing %s on %s files (%s files cached)',
                      name, len(files), len(cached))
             log.debug('$ %s', ' '.join(args))
@@ -97,6 +100,7 @@ def main():
             if rc != 0:
                 sys.exit(rc)
             else:
+                # cache results on success
                 log.debug('Caching results')
                 cache(files)
         elif cached:
