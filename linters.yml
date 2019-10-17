@@ -1,0 +1,25 @@
+---
+
+flake8:
+    include:
+        - "*.py"
+    # exclude test files
+    exclude:
+        - "*tests/*"
+
+shellcheck:
+    include:
+        - "*.sh"
+
+yamllint:
+    include:
+        - "*.yaml"
+        - "*.yml"
+
+hadolint:
+    include:
+        - "Dockerfile*"
+    # extra options to pass to hadolint binary
+    options:
+        - "--ignore=DL3006"
+        - "--ignore=DL3008"
