@@ -1,5 +1,15 @@
-Linter container
-================
+Linter docker images by bearstech
+==================================
+
+- [bearstech/lint](https://hub.docker.com/r/bearstech/lint/)
+
+Dockerfiles
+-----------
+
+Dockerfiles are available at https://github.com/factorysh/docker-lint
+
+Usage
+-----
 
 Add a `linters.yml` to your project:
 
@@ -32,7 +42,7 @@ hadolint:
         - "--ignore=DL3008"
 ```
 
-Usage:
+Then run:
 
 ```
 $ docker run \
