@@ -11,7 +11,8 @@ RUN set -eux \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/* \
     &&  python3 -m venv /opt/venv \
-    &&  /opt/venv/bin/pip install --no-cache-dir yamllint flake8
+    &&  /opt/venv/bin/pip install --no-cache-dir yamllint flake8 \
+    &&  rm -Rf /.cache
 
 
 

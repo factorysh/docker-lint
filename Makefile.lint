@@ -1,8 +1,8 @@
 
-lint:
+lint: build
 	docker run \
 		--rm -u $(shell id -u) \
 		-v $(HOME)/.cache:/.cache \
-		-v $(PWD):/docker-lint \
+		-v $(shell pwd):/docker-lint \
 		-w /docker-lint \
 		bearstech/lint
