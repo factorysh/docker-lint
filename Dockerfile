@@ -35,12 +35,8 @@ ARG BUILD_DATE
 
 LABEL \
     com.bearstech.image.revision_date=${GIT_DATE} \
-
     org.opencontainers.image.authors=Bearstech \
-
     org.opencontainers.image.revision=${GIT_VERSION} \
     org.opencontainers.image.created=${BUILD_DATE} \
-
     org.opencontainers.image.url=https://github.com/factorysh/docker-lint \
     org.opencontainers.image.source=https://github.com/factorysh/docker-lint/blob/${GIT_VERSION}/Dockerfile
-
