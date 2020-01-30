@@ -5,6 +5,7 @@ FROM bearstech/python:3.7
 COPY --from=hadolint /bin/hadolint /bin/
 
 RUN set -eux \
+    &&  export http_proxy=${HTTP_PROXY} \
     &&  apt-get update \
     &&  apt-get install -y --no-install-recommends \
                 python3-venv \
