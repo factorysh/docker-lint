@@ -1,7 +1,10 @@
 ARG python_version
+
+FROM hadolint/hadolint AS hadolint
+
 FROM bearstech/python:${python_version}
 
-COPY --from=hadolint/hadolint /bin/hadolint /bin/
+COPY --from=hadolint /bin/hadolint /bin/
 
 RUN set -eux \
     &&  export http_proxy=${HTTP_PROXY} \
