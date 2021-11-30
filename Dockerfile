@@ -1,8 +1,7 @@
-FROM hadolint/hadolint AS hadolint
+ARG python_version
+FROM bearstech/python:${python_version}
 
-FROM bearstech/python:3.7
-
-COPY --from=hadolint /bin/hadolint /bin/
+COPY --from=hadolint/hadolint /bin/hadolint /bin/
 
 RUN set -eux \
     &&  export http_proxy=${HTTP_PROXY} \
@@ -14,7 +13,6 @@ RUN set -eux \
     &&  /opt/venv/bin/pip install --no-cache-dir yamllint flake8 \
     &&  apt-get purge -y \
         python3-venv \
-        python3.7-venv \
         python-pip-whl \
         python3-distutils \
         python3-lib2to3 \
